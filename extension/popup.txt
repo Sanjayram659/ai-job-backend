@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body style="width:300px; font-family:Arial;">
+
+<h3>AI Job Assistant</h3>
+
+<input type="file" id="resumeUpload" />
+<br><br>
+
+<input type="text" id="resumeName" placeholder="Resume name" />
+<br><br>
+
+<button id="saveResume">Save Resume</button>
+
+<br><br>
+
+<select id="resumeList"></select>
+
+<br><br>
+
+<button id="selectResume">Use Resume</button>
+
+<hr>
+
+<h4>Preview</h4>
+
+<div id="previewBox" style="height:200px; overflow:auto; border:1px solid #ccc; padding:5px;"></div>
+
+<br>
+
+<button id="approve">Approve & Apply</button>
+<button id="regenerate">Regenerate</button>
+
+<script src="popup.js"></script>
+
+</body>
+</html>
