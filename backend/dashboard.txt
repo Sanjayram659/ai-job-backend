@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Job Dashboard</title>
+</head>
+<body style="font-family:Arial">
+
+<h2>📊 Applications Dashboard</h2>
+
+<table border="1" id="table">
+  <tr>
+    <th>Company</th>
+    <th>Role</th>
+    <th>Date</th>
+  </tr>
+</table>
+
+<script>
+async function loadData() {
+  const res = await fetch("http://localhost:3000/applications");
+  const data = await res.json();
+
+  const table = document.getElementById("table");
+
+  data.forEach(app => {
+    const row = table.insertRow();
+
+    row.insertCell(0).innerText = app.company || "N/A";
+    row.insertCell(1).innerText = app.role || "N/A";
+    row.insertCell(2).innerText = new Date(app.date).toLocaleString();
+  });
+}
+
+loadData();
+</script>
+
+</body>
+</html>

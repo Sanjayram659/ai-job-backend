@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const OPENAI_KEY = "YOUR_OPENAI_KEY";
+const OPENAI_KEY = process.env.OPENAI_KEY;
 
 // ===============================
 // ✉️ GENERATE COVER LETTER
@@ -13,7 +13,6 @@ Rules:
 - Use ONLY resume data
 - Align with job description
 - Keep it concise (200–300 words)
-- No fake claims
 
 Resume:
 ${resumeText}
@@ -33,16 +32,40 @@ Output: Cover letter
       },
       {
         headers: {
-          Authorization: `Bearer ${OPENAI_KEY}`
+          Authorization: `Bearer ${OPENAI_KEY}`,
+          "Content-Type": "application/json"
         }
       }
     );
 
     return res.data.choices[0].message.content;
+
   } catch (err) {
     console.error("Cover letter error:", err.message);
     return "Cover letter generation failed.";
   }
 }
 
-module.exports = { generateCoverLetter };
+// ===============================
+// 📧 GENERATE FOLLOW-UP EMAIL
+// ===============================
+async function generateEmail({ resumeText, jobDesc }) {
+  return `
+Hello,
+
+I recently applied for this role and wanted to express my strong interest.
+
+${resumeText.slice(0, 300)}
+
+Looking forward to your response.
+
+Regards,  
+Sanjay
+`;
+}
+
+// ✅ EXPORT BOTH (IMPORTANT)
+module.exports = {
+  generateCoverLetter,
+  generateEmail
+};

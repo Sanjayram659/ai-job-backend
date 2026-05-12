@@ -1,0 +1,16 @@
+body {
+  font-family: Arial;
+  padding: 10px;
+  width: 300px;
+}
+
+button {
+  padding: 6px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+#previewBox {
+  font-size: 12px;
+  white-space: pre-wrap;
+}

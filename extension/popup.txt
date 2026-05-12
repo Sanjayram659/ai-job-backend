@@ -1,35 +1,205 @@
 <!DOCTYPE html>
 <html>
-<body style="width:300px; font-family:Arial;">
+<head>
+  <style>
+    body {
+      width: 360px;
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      padding: 10px;
+    }
 
-<h3>AI Job Assistant</h3>
+    h3 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
 
-<input type="file" id="resumeUpload" />
-<br><br>
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
 
-<input type="text" id="resumeName" placeholder="Resume name" />
-<br><br>
+    input, select, button {
+      width: 100%;
+      padding: 7px;
+      margin-top: 6px;
+      margin-bottom: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 13px;
+    }
 
-<button id="saveResume">Save Resume</button>
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+    }
 
-<br><br>
+    button:hover {
+      background: #0056b3;
+    }
 
-<select id="resumeList"></select>
+    .secondary {
+      background: #6c757d;
+    }
 
-<br><br>
+    .secondary:hover {
+      background: #545b62;
+    }
 
-<button id="selectResume">Use Resume</button>
+    .success {
+      background: #28a745;
+    }
 
-<hr>
+    .success:hover {
+      background: #1e7e34;
+    }
 
-<h4>Preview</h4>
+    .danger {
+      background: #dc3545;
+    }
 
-<div id="previewBox" style="height:200px; overflow:auto; border:1px solid #ccc; padding:5px;"></div>
+    .danger:hover {
+      background: #b52a37;
+    }
 
-<br>
+    .preview {
+      height: 160px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 6px;
+      font-size: 12px;
+      white-space: pre-wrap;
+      background: #fafafa;
+    }
 
-<button id="approve">Approve & Apply</button>
-<button id="regenerate">Regenerate</button>
+    .row {
+      display: flex;
+      gap: 6px;
+    }
+
+    .row button {
+      flex: 1;
+    }
+
+    label {
+      font-size: 13px;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-top: 6px;
+      color: #555;
+    }
+
+    .badge {
+      background: #e9ecef;
+      padding: 3px 6px;
+      border-radius: 5px;
+    }
+
+    .title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h3>🤖 AI Job Assistant</h3>
+
+<!-- ===============================
+📊 QUICK STATS
+=============================== -->
+<div class="card">
+  <div class="title">📊 Stats</div>
+
+  <div class="stats">
+    <span>Applications:</span>
+    <span class="badge" id="appCount">0</span>
+  </div>
+
+  <div class="stats">
+    <span>ATS Score:</span>
+    <span class="badge" id="atsScore">N/A</span>
+  </div>
+</div>
+
+<!-- ===============================
+📁 RESUME MANAGER
+=============================== -->
+<div class="card">
+  <div class="title">📁 Resume Manager</div>
+
+  <input type="file" id="resumeUpload" />
+
+  <input type="text" id="resumeName" placeholder="Resume name (e.g. Mechanical)" />
+
+  <button id="saveResume">Save Resume</button>
+
+  <select id="resumeList"></select>
+
+  <button id="selectResume" class="secondary">Use Selected Resume</button>
+</div>
+
+<!-- ===============================
+🤖 AI PROCESS
+=============================== -->
+<div class="card">
+  <div class="title">🤖 AI Processing</div>
+
+  <button id="regenerate">Generate / Regenerate</button>
+
+  <div class="row">
+    <button id="approve" class="success">Approve</button>
+    <button id="reset" class="danger">Reset</button>
+  </div>
+</div>
+
+<!-- ===============================
+👀 PREVIEW
+=============================== -->
+<div class="card">
+  <div class="title">👀 Preview</div>
+
+  <div id="previewBox" class="preview">
+    No data yet...
+  </div>
+</div>
+
+<!-- ===============================
+⚙️ AUTOMATION SETTINGS
+=============================== -->
+<div class="card">
+  <div class="title">⚙️ Automation</div>
+
+  <label>
+    <input type="checkbox" id="autoApply">
+    Auto Apply (Autopilot)
+  </label>
+
+  <br>
+
+  <label>
+    <input type="checkbox" id="autoEmail">
+    Auto send email
+  </label>
+
+  <br>
+
+  <label>
+    <input type="checkbox" id="confirmEmail" checked>
+    Confirm before email
+  </label>
+</div>
 
 <script src="popup.js"></script>
 
